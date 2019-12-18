@@ -15,7 +15,6 @@ path = [cwd,
     cwd + '/nrfx/templates']
 
 src = Split('''
-    nrfx/mdk/arm_startup_nrf52.s
     nrfx/mdk/system_nrf52.c
 
     nrfx/drivers/src/prs/nrfx_prs.c
@@ -43,6 +42,11 @@ src = Split('''
 
     nrfx/templates/nrfx_glue.c''')
 
+if rtconfig.CROSS_TOOL == 'gcc':
+    src += [cwd + '/nrfx/mdk/gcc_startup_nrf52.S']
+elif rtconfig.CROSS_TOOL == 'keil':
+    src += [cwd + '/nrfx/mdk/arm_startup_nrf52.s']
+    
 CPPDEFINES = ['NRF52832_XXAA']
 
 group = DefineGroup('nordic', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
