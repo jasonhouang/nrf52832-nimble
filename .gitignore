@@ -4,3 +4,11 @@
 *.bin
 *.hex
 *.pyc
+*.dblite
+
+build
+Debug
+
+cconfig.h
+
+tags
